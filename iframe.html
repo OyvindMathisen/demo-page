@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFrame</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="nav-bar">
+        <button type="button" class="nav-button" onclick="window.location.assign('/index.html')">Index</button>
+        <button type="button" class="nav-button" onclick="window.location.assign('/seamless.html')">Seamless View Test</button>
+        <button type="button" class="nav-button" onclick="window.location.assign('/iframe.html')">IFrame Tester</button>
+    </div>
+    <div>
+        <script src="iframe-app.js" type="text/javascript"></script>
+        <label for="launch-link-input">Launch Link: </label>
+        <input id="launch-link-input" type="text">
+        <button onclick="launch()">Launch!</button>
+        <iframe id="frame" src="/iframe-content.html">
+        </iframe>
+    </div>
+</body>
+</html>
