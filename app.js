@@ -47,6 +47,10 @@ function openPaymentMenu() {
             window.payex.hostedView.invoice(config).open();
         else if (scriptUrl.includes("creditcard"))
             window.payex.hostedView.creditCard(config).open();
+        else if (scriptUrl.includes("carpay"))
+            window.payex.hostedView.carPay(config).open();
+        else if (scriptUrl.includes("trustly"))
+            window.payex.hostedView.trustly(config).open();
         else
             window.payex.hostedView.checkout(config).open();
     }
