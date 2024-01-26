@@ -1,4 +1,12 @@
 function openPaymentMenu() {
+    if (instrument) {
+        instrument.close();
+        const payexScript = document.getElementById("payex-payment-menu-script");
+        const payairScript = document.getElementById("px-xpay-script");
+        payexScript.remove();
+        payairScript.remove();
+    }
+
     const input = document.getElementById("script-input");
     const scriptUrl = input.value;
     const script = document.createElement("script");
@@ -37,22 +45,9 @@ function openPaymentMenu() {
             culture: string = "en-us"
         };
 
-        if (scriptUrl.includes("swish"))
-            window.payex.hostedView.swish(config).open();
-        else if (scriptUrl.includes("mobilepay"))
-            window.payex.hostedView.mobilepay(config).open();
-        else if (scriptUrl.includes("vipps"))
-            window.payex.hostedView.vipps(config).open();
-        else if (scriptUrl.includes("invoice"))
-            window.payex.hostedView.invoice(config).open();
-        else if (scriptUrl.includes("creditcard"))
-            window.payex.hostedView.creditCard(config).open();
-        else if (scriptUrl.includes("carpay"))
-            window.payex.hostedView.carPay(config).open();
-        else if (scriptUrl.includes("trustly"))
-            window.payex.hostedView.trustly(config).open();
-        else
-            window.payex.hostedView.checkout(config).open();
+        const instrumentName = getInstrumentFromUrl(scriptUrl);
+        instrument = window.payex.hostedView[instrumentName](config);
+        instrument.open();
     }
     document.body.insertAdjacentElement("afterbegin", script);
 }
@@ -62,4 +57,56 @@ function handleEvent(event, data) {
 
     const textField = document.getElementById("debug-logger");
     textField.value += `${JSON.stringify(data)}\n`;
+}
+
+function getInstrumentFromUrl(url) {
+    if (url.includes("swish"))
+        return "swish";
+    else if (url.includes("mobilepay"))
+        return "mobilepay";
+    else if (url.includes("vipps"))
+        return "vipps";
+    else if (url.includes("invoice"))
+        return "invoice";
+    else if (url.includes("creditcard"))
+        return "creditcard";
+    else if (url.includes("carpay"))
+        return "carpay";
+    else if (url.includes("trustly"))
+        return "trustly";
+    else if (url.includes("checkout") || url.includes("paymentmenu"))
+        return "checkout";
+}
+
+let instrument;
+
+function openScript() {
+    console.log("open script called");
+    if (instrument) {
+
+    }
+}
+
+function updateScript() {
+    console.log("update script called");
+}
+
+function refreshScript() {
+    console.log("refresh script called");
+}
+
+function closeScript() {
+    console.log("close script called");
+}
+
+function cancelScript() {
+    console.log("cancel script called");
+}
+
+const HostedViewCommands = {
+    Open: "open",
+    Close: "close",
+    Update: "update",
+    Refresh: "refresh",
+    Cancel: "cancel"
 }
