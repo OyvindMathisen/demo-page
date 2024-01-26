@@ -28,9 +28,9 @@ function getInstrumentFromUrl(url) {
         return "vipps";
     else if (url.includes("invoice"))
         return "invoice";
-    else if (url.includes("creditcard"))
+    else if (url.includes("creditCard"))
         return "creditcard";
-    else if (url.includes("carpay"))
+    else if (url.includes("carPay"))
         return "carpay";
     else if (url.includes("trustly"))
         return "trustly";
