@@ -34,8 +34,7 @@ function getInstrumentFromUrl(url) {
         return "carPay";
     else if (url.includes("trustly"))
         return "trustly";
-    else if (url.includes("checkout") || url.includes("paymentmenu"))
-        return "checkout";
+    return "checkout";
 }
 
 function cleanUpInstrument() {
