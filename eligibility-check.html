@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IFrame</title>
+    <title>Eligiblity Check</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,13 +13,11 @@
         <button type="button" class="nav-button" onclick="window.location.assign('./iframe.html')">IFrame Tester</button>
         <button type="button" class="nav-button" onclick="window.location.assign('./eligibility-check.html')">Eligibility Check</button>
     </div>
-    <div>
-        <script src="iframe-app.js" type="text/javascript"></script>
-        <label for="launch-link-input">Launch Link: </label>
-        <input id="launch-link-input" type="text">
-        <button onclick="launch()">Launch!</button>
-        <iframe id="frame" src="./iframe-content.html">
-        </iframe>
-    </div>
+    <script src="https://ecom.externalintegration.payex.com/checkout/integration" type="text/javascript" defer></script>
+    <script src="eligibility.js" type="text/javascript" defer></script>
+    <h1>Eligiblity Demo</h1>
+    <button onclick="checkEligibility()">Check Eligibility</button>
+    <h2>The following instruments will show up in the payment menu</h2>
+    <div id="container"></div>
 </body>
 </html>
