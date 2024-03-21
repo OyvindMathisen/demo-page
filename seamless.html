@@ -16,8 +16,10 @@
     <script src="app.js" type="text/javascript" defer></script>
 
     <div id="main-script-input">
-        <input id="script-input" type="text">
-        <button type="button" onclick="openPaymentMenu()">Launch</button>
+        <form id="script-input-form">
+            <input id="script-input" type="text">
+            <button id="script-input-button" type="submit">Launch</button>
+        </form>
         <textarea id="debug-logger"></textarea>
     </div>
     <div id="script-controller">

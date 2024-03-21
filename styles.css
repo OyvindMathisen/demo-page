@@ -18,6 +18,21 @@
     height: 600px
 }
 
+#script-input-form{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#script-input-button {
+    width: 10%;
+    min-width: 60px;
+}
+
+#script-input {
+    width: 85%;
+}
+
 #debug-logger {
     margin-top: 1em;
     display: block;
