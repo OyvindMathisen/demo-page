@@ -2,7 +2,12 @@
 const inputForm = document.getElementById("script-input-form");
 const inputField = document.getElementById("script-input");
 const textField = document.getElementById("debug-logger");
+inputForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    openPaymentMenu();
+});
 let instrument = null;
+let redirectUrl = null;
 let config = {
     onPaymentAttemptStarted: Function = (data) => handleEvent("onPaymentAttemptStarted", data),
     onPaymentAttemptFailed: Function = (data) => handleEvent("onPaymentAttemptFailed", data),
@@ -34,11 +39,6 @@ let config = {
     culture: string = "en-us"
 };
 
-inputForm.addEventListener("submit", function(event) {
-    event.preventDefault();
-    openPaymentMenu();
-});
-
 function openPaymentMenu() {
     cleanUpInstrument();
 
@@ -68,6 +68,10 @@ function openPaymentMenu() {
 function handleEvent(event, data) {
     textField.value += `${JSON.stringify(data)}\n`;
     console.log(`${event}: ${JSON.stringify(data)}`);
+
+    // TODO: Improve this 'whitelist'
+    if ((event === "onExternalRedirect" || event === "onOutOfViewRedirect") && data.redirectUrl !== undefined)
+        window.location.assign(data.redirectUrl);
 }
 
 function getInstrumentFromUrl(url) {
