@@ -71,8 +71,9 @@ function openPaymentMenu() {
 }
 
 function handleEvent(event, data) {
-    textField.value += `${JSON.stringify(data)}\n`;
-    console.log(`${event}: ${JSON.stringify(data)}`);
+    const json = JSON.stringify(data);
+    addLogText(json);
+    console.log(`${event}: ${json}`);
 
     // TODO: Improve this 'whitelist'
     if ((event === "onExternalRedirect" || event === "onOutOfViewRedirect") && data.redirectUrl !== undefined)
@@ -117,7 +118,7 @@ function closeScriptModal() {
 
 function openScript() {
     if (instrument) {
-        textField.value += `open() called\n`;
+        addLogText("open() called");
         cleanUpInstrument();
         instrument.open();
     }
@@ -131,7 +132,7 @@ function updateScript() {
     };
 
     if (instrument) {
-        textField.value += `update() called\n`;
+        addLogText("update() called");
         instrument.update(update);
     }
 
@@ -140,23 +141,28 @@ function updateScript() {
 
 function refreshScript() {
     if (instrument) {
-        textField.value += `refresh() called\n`;
+        addLogText("refresh() called");
         instrument.refresh();
     }
 }
 
 function closeScript() {
     if (instrument) {
-        textField.value += `close() called\n`;
+        addLogText("close() called");
         cleanUpInstrument();
     }
 }
 
 function cancelScript() {
     if (instrument) {
-        textField.value += `cancel() called\n`;
+        addLogText("cancel() called");
         instrument.cancel();
     }
+}
+
+function addLogText(text) {
+    textField.value += `${text}\n`;
+    textField.scrollTop = textField.scrollHeight;
 }
 
 function getCustomStyle() {
