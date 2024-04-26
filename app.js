@@ -81,20 +81,22 @@ function handleEvent(event, data) {
 }
 
 function getInstrumentFromUrl(url) {
+    if (url.includes("carpay"))
+        return "carpay";
+    if (url.includes("creditaccount"))
+        return "creditaccount";
+    if (url.includes("creditcard"))
+        return "creditcard";
+    if (url.includes("invoice"))
+        return "invoice";
+    if (url.includes("mobilepay"))
+        return "mobilepay";
     if (url.includes("swish"))
         return "swish";
-    else if (url.includes("mobilepay"))
-        return "mobilepay";
-    else if (url.includes("vipps"))
-        return "vipps";
-    else if (url.includes("invoice"))
-        return "invoice";
-    else if (url.includes("creditcard"))
-        return "creditCard";
-    else if (url.includes("carpay"))
-        return "carPay";
-    else if (url.includes("trustly"))
+    if (url.includes("trustly"))
         return "trustly";
+    if (url.includes("vipps"))
+        return "vipps";
     return "checkout";
 }
 
