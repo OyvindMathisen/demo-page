@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal testing site used to play around with Swedbank Pay's payment solutions. Allows the user to access all of the PayEx script functions and a customizable styling option, all built in.">
     <title>Seamless View</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,9 +18,11 @@
 
     <div id="main-script-input">
         <form id="script-input-form">
+            <label for="script-input">Script URL:</label>
             <input id="script-input" type="text">
             <button id="script-input-button" type="submit">Launch</button>
         </form>
+        <label for="debug-logger">Logs</label>
         <textarea id="debug-logger"></textarea>
     </div>
     <div id="script-controller">
@@ -28,7 +31,7 @@
         <button type="button" class="script-button" id="script-refresh" onclick="refreshScript()">Refresh</button>
         <button type="button" class="script-button" id="script-close" onclick="closeScript()">Close</button>
         <button type="button" class="script-button" id="script-cancel" onclick="cancelScript()">Cancel</button>
-        <button type="button" class="script-button" id="script-cancel" onclick="clearLogBlock()">Empty Logs</button>
+        <button type="button" class="script-button" id="script-clear-logs" onclick="clearLogBlock()">Empty Logs</button>
     </div>
     <div id="paymentmenu-container"></div>
     <form id="modal">
@@ -217,7 +220,7 @@
                         </div>
                     </div>
                     <div class="modal-options">
-                        <label for="modal-secondary-disabled-hover-text-color">Text Color</label>
+                        <label for="modal-secondary-disabled-hover-color-text">Text Color</label>
                         <div>
                             <input id="modal-secondary-disabled-hover-color-text" type="text" name="secondary-disabled-hover-text-color">
                         </div>
