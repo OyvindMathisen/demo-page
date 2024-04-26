@@ -169,6 +169,10 @@ function addLogText(text) {
     textField.scrollTop = textField.scrollHeight;
 }
 
+function clearLogBlock() {
+    textField.value = "";
+}
+
 function getCustomStyle() {
     const form = new FormData(styleForm);
     const style = {
