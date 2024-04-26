@@ -1,10 +1,14 @@
-
 const inputForm = document.getElementById("script-input-form");
+const styleForm = document.getElementById("modal");
 const inputField = document.getElementById("script-input");
 const textField = document.getElementById("debug-logger");
 inputForm.addEventListener("submit", function(event) {
     event.preventDefault();
     openPaymentMenu();
+});
+styleForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    updateScript();
 });
 let instrument = null;
 let redirectUrl = null;
@@ -36,7 +40,7 @@ let config = {
     onPaymentPending: Function = (data) => handleEvent("onPaymentPending", data),
 
     container: any = "paymentmenu-container",
-    culture: string = "en-us"
+    culture: string = "sv-SE"
 };
 
 function openPaymentMenu() {
@@ -102,6 +106,14 @@ function cleanUpInstrument() {
     }
 }
 
+function openScriptModal() {
+    styleForm.style.display = 'flex';
+}
+
+function closeScriptModal() {
+    styleForm.style.display = 'none';
+}
+
 function openScript() {
     if (instrument) {
         textField.value += `open() called\n`;
@@ -111,10 +123,65 @@ function openScript() {
 }
 
 function updateScript() {
-    // TODO: Add field to update script (language, style, etc);
-    if (instrument) {
-        // textField.value += `update() called\n`;
+    const form = new FormData(styleForm);   
+    const update = {
+        "culture": form.get("culture"),
+        "style": {
+            "button": {
+                "enabled": {
+                    "backgroundColor": form.get("primary-enabled-color"),
+                    "color": form.get("primary-enabled-text-color"),
+                    "outline": form.get("primary-enabled-outline"),
+                    "hover": {
+                        "backgroundColor": form.get("primary-enabled-hover-color"),
+                        "color": form.get("primary-enabled-hover-text-color"),
+                        "outline": form.get("primary-enabled-hover-outline")
+                    }
+                },
+                "disabled": {
+                    "backgroundColor": form.get("primary-disabled-color"),
+                    "color": form.get("primary-disabled-text-color"),
+                    "outline": form.get("primary-disabled-outline"),
+                    "hover": {
+                        "backgroundColor": form.get("primary-disabled-hover-color"),
+                        "color": form.get("primary-disabled-hover-text-color"),
+                        "outline": form.get("primary-disabled-hover-outline")
+                    }
+                },
+                "borderRadius": form.get("primary-border-radius")
+            },
+            "secondaryButton": {
+                "enabled": {
+                    "backgroundColor": form.get("secondary-enabled-color"),
+                    "color": form.get("secondary-enabled-text-color"),
+                    "outline": form.get("secondary-enabled-outline"),
+                    "hover": {
+                        "backgroundColor": form.get("secondary-enabled-hover-color"),
+                        "color": form.get("secondary-enabled-text-color"),
+                        "outline": form.get("secondary-enabled-hover-outline")
+                    }
+                },
+                "disabled": {
+                    "backgroundColor": form.get("secondary-disabled-color"),
+                    "color": form.get("secondary-disabled-text-color"),
+                    "outline": form.get("secondary-disabled-outline"),
+                    "hover": {
+                        "backgroundColor": form.get("secondary-disabled-hover-color"),
+                        "color": form.get("secondary-disabled-hover-text-color"),
+                        "outline": form.get("secondary-disabled-hover-outline")
+                    }
+                },
+                "borderRadius": form.get("secondary-border-radius")
+            },
+        }
     }
+
+    if (instrument) {
+        textField.value += `update() called\n`;
+        instrument.update(update);
+    }
+
+    this.closeScriptModal();
 }
 
 function refreshScript() {

@@ -24,11 +24,216 @@
     </div>
     <div id="script-controller">
         <button type="button" class="script-button" id="script-open" onclick="openScript()">Open</button>
-        <button type="button" class="script-button" id="script-update" onclick="updateScript()" disabled>Update</button>
+        <button type="button" class="script-button" id="script-update" onclick="openScriptModal()">Update</button>
         <button type="button" class="script-button" id="script-refresh" onclick="refreshScript()">Refresh</button>
         <button type="button" class="script-button" id="script-close" onclick="closeScript()">Close</button>
         <button type="button" class="script-button" id="script-cancel" onclick="cancelScript()">Cancel</button>
     </div>
     <div id="paymentmenu-container"></div>
+    <form id="modal">
+        <div id="modal-list">
+            <h1>Custom Styling</h1>
+            <div id="modal-culture" class="modal-options">
+                <label for="modal-culture-input">Culture</label>
+                <select id="modal-culture-input" name="culture">
+                    <option value="sv-SE">Svenska</option>
+                    <option value="nb-NO">Norsk</option>
+                    <option value="en-US">English (US)</option>
+                    <option value="da-DK">Dansk</option>
+                    <option value="fi-FI">Suomi</option>
+                </select>
+            </div>
+            <div id="modal-button">
+                <h2>Primary Button</h2>
+                <div class="modal-options">
+                    <label for="modal-primary-border-radius">Border Radius</label>
+                    <div>
+                        <input id="modal-primary-border-radius" type="number" name="primary-border-radius" value="8"> px
+                    </div>
+                </div>
+                <div class="modal-sub-options">
+                    <h3>Enabled</h3>
+                    <div class="modal-options">
+                        <label for="modal-primary-enabled-color">Background Color</label>
+                        <div>
+                            <input id="modal-primary-enabled-color" type="text" name="primary-enabled-color" value="#2F2424">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-primary-enabled-text-color">Text Color</label>
+                        <div>
+                            <input id="modal-primary-enabled-text-color" type="text" name="primary-enabled-text-color" value="#FFFFFF">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-primary-enabled-outline">Outline</label>
+                        <div>
+                            <input id="modal-primary-enabled-outline" type="text" name="primary-enabled-outline" value="1px solid transparent">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-sub-options">
+                    <h3>Enabled (Hover)</h3>
+                    <div class="modal-options">
+                        <label for="modal-primary-hover-enabled-color">Background Color</label>
+                        <div>
+                            <input id="modal-primary-hover-enabled-color" type="text" name="primary-enabled-hover-color" value="#72605E">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-primary-hover-enabled-text-color">Text Color</label>
+                        <div>
+                            <input id="modal-primary-hover-enabled-text-color" type="text" name="primary-enabled-hover-text-color" value="#FFFFFF">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-primary-hover-enabled-outline">Outline</label>
+                        <div>
+                            <input id="modal-primary-hover-enabled-outline" type="text" name="primary-enabled-hover-outline" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-sub-options">
+                    <h3>Disabled</h3>
+                    <div class="modal-options">
+                        <label for="modal-primary-disabled-color">Background Color</label>
+                        <div>
+                            <input id="modal-primary-disabled-color" type="text" name="primary-disabled-color" value="#EBE7E2"> 
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-primary-disabled-text-color">Text Color</label>
+                        <div>
+                            <input id="modal-primary-disabled-text-color" type="text" name="primary-disabled-text-color" value="#72605E">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-primary-disabled-outline">Outline</label>
+                        <div>
+                            <input id="modal-primary-disabled-outline" type="text" name="primary-disabled-outline" value="1px solid transparent">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-sub-options">
+                    <h3>Disabled (Hover)</h3>
+                    <div class="modal-options">
+                        <label for="modal-primary-hover-disabled-color">Background Color</label>
+                        <div>
+                            <input id="modal-primary-hover-disabled-color" type="text" name="primary-disabled-hover-color" value="">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-primary-hover-disabled-text-color">Text Color</label>
+                        <div>
+                            <input id="modal-primary-hover-disabled-text-color" type="text" name="primary-disabled-hover-text-color" value="">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-primary-hover-disabled-outline">Outline</label>
+                        <div>
+                            <input id="modal-primary-hover-disabled-outline" type="text" name="primary-disabled-hover-outline" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="modal-secondary-button">
+                <h2>Secondary Button</h2>
+                <div class="modal-options">
+                    <label for="modal-secondary-border-radius">Border Radius</label>
+                    <div>
+                        <input id="modal-secondary-border-radius" type="number" name="secondary-border-radius" value="8"> px
+                    </div>
+                </div>
+                <div class="modal-sub-options">
+                    <h3>Enabled</h3>
+                    <div class="modal-options">
+                        <label for="modal-secondary-enabled-color">Background Color</label>
+                        <div>
+                            <input id="modal-secondary-enabled-color" type="text" name="secondary-enabled-color" value="#FFFFFF">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-secondary-enabled-text-color">Text Color</label>
+                        <div>
+                            <input id="modal-secondary-enabled-text-color" type="text" name="secondary-enabled-text-color" value="#2F2424">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-secondary-enabled-outline">Outline</label>
+                        <div>
+                            <input id="modal-secondary-enabled-outline" type="text" name="secondary-enabled-outline" value="1px solid #72605E">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-sub-options">
+                    <h3>Enabled (Hover)</h3>
+                    <div class="modal-options">
+                        <label for="modal-secondary-enabled-hover-color">Background Color</label>
+                        <div>
+                            <input id="modal-secondary-enabled-hover-color" type="text" name="secondary-enabled-hover-color" value="#72605E">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-secondary-enabled-hover-text-color">Text Color</label>
+                        <div>
+                            <input id="modal-secondary-enabled-hover-text-color" type="text" name="secondary-enabled-hover-text-color" value="">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-secondary-enabled-hover-outline">Outline</label>
+                        <div>
+                            <input id="modal-secondary-enabled-hover-outline" type="text" name="secondary-enabled-hover-outline" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-sub-options">
+                    <h3>Disabled</h3>
+                    <div class="modal-options">
+                        <label for="modal-secondary-disabled-color">Background Color</label>
+                        <div>
+                            <input id="modal-secondary-disabled-color" type="text" name="secondary-disabled-color" value="#EBE7E2">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-secondary-disabled-text-color">Text Color</label>
+                        <div>
+                            <input id="modal-secondary-disabled-text-color" type="text" name="secondary-disabled-text-color" value="#72605E">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-secondary-disabled-outline">Outline</label>
+                        <div>
+                            <input id="modal-secondary-disabled-outline" type="text" name="secondary-disabled-outline" value="1px solid transparent">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-sub-options">
+                    <h3>Disabled (Hover)</h3>
+                    <div class="modal-options">
+                        <label for="modal-secondary-disabled-hover-color">Background Color</label>
+                        <div>
+                            <input id="modal-secondary-disabled-hover-color" type="text" name="secondary-disabled-hover-color" value="">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-secondary-disabled-hover-text-color">Text Color</label>
+                        <div>
+                            <input id="modal-secondary-disabled-hover-color-text" type="text" name="secondary-disabled-hover-text-color" value="">
+                        </div>
+                    </div>
+                    <div class="modal-options">
+                        <label for="modal-secondary-disabled-hover-outline">Outline</label>
+                        <div>
+                            <input id="modal-secondary-disabled-hover-outline" type="text" name="secondary-disabled-hover-outline" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modal-navigation">
+            <button class="modal-buttons" type="submit">Apply Styles</button>
+            <button class="modal-buttons" type="button" onclick="closeScriptModal()">Close</button>
+        </div>
+    </form>
 </body>
 </html>
