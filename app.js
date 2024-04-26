@@ -54,16 +54,18 @@ function openPaymentMenu() {
         url = new URL(scriptUrl);
     }
     catch (e) {
-        console.warn(`Unable to create script from url: ${url}`);
+        const error = `Unable to create script from url: '${scriptUrl}'`;
+        addLogText(error);
+        console.warn(error);
         return;
     }
 
     const script = document.createElement("script");
-    script.src = scriptUrl;
+    script.src = url.href;
     script.type = "text/javascript";
     script.id = "payex-payment-menu-script";
     script.onload = function () {
-        const instrumentName = getInstrumentFromUrl(scriptUrl);
+        const instrumentName = getInstrumentFromUrl(url.href);
         instrument = window.payex.hostedView[instrumentName](config);
         instrument.open();
     }
