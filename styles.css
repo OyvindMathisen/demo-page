@@ -112,3 +112,28 @@
     height: 50px;
     margin: 0 10px;
 }
+
+@media (prefers-color-scheme: dark) {
+    * {
+        background-color: #040D12;
+        color: #B6B5BA;
+        scrollbar-color: #5C8374 #040D12;
+    }
+
+    button {
+        background-color: #183D3D;
+    }
+
+    input, textarea, select, option {
+        background-color: #183D3D;
+    }
+
+    #nav-bar {
+        background-color: #5C8374;
+    }
+
+    #modal {
+        background-color: #040D12;
+        border-color: #B6B5BA;
+    }
+}
