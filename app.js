@@ -42,6 +42,7 @@ let config = {
     container: any = "paymentmenu-container",
     culture: string = "sv-SE"
 };
+resetCustomStyle();
 
 function openPaymentMenu() {
     cleanUpInstrument();
@@ -123,58 +124,11 @@ function openScript() {
 }
 
 function updateScript() {
-    const form = new FormData(styleForm);   
+    const form = new FormData(styleForm);
     const update = {
         "culture": form.get("culture"),
-        "style": {
-            "button": {
-                "enabled": {
-                    "backgroundColor": form.get("primary-enabled-color"),
-                    "color": form.get("primary-enabled-text-color"),
-                    "outline": form.get("primary-enabled-outline"),
-                    "hover": {
-                        "backgroundColor": form.get("primary-enabled-hover-color"),
-                        "color": form.get("primary-enabled-hover-text-color"),
-                        "outline": form.get("primary-enabled-hover-outline")
-                    }
-                },
-                "disabled": {
-                    "backgroundColor": form.get("primary-disabled-color"),
-                    "color": form.get("primary-disabled-text-color"),
-                    "outline": form.get("primary-disabled-outline"),
-                    "hover": {
-                        "backgroundColor": form.get("primary-disabled-hover-color"),
-                        "color": form.get("primary-disabled-hover-text-color"),
-                        "outline": form.get("primary-disabled-hover-outline")
-                    }
-                },
-                "borderRadius": form.get("primary-border-radius")
-            },
-            "secondaryButton": {
-                "enabled": {
-                    "backgroundColor": form.get("secondary-enabled-color"),
-                    "color": form.get("secondary-enabled-text-color"),
-                    "outline": form.get("secondary-enabled-outline"),
-                    "hover": {
-                        "backgroundColor": form.get("secondary-enabled-hover-color"),
-                        "color": form.get("secondary-enabled-text-color"),
-                        "outline": form.get("secondary-enabled-hover-outline")
-                    }
-                },
-                "disabled": {
-                    "backgroundColor": form.get("secondary-disabled-color"),
-                    "color": form.get("secondary-disabled-text-color"),
-                    "outline": form.get("secondary-disabled-outline"),
-                    "hover": {
-                        "backgroundColor": form.get("secondary-disabled-hover-color"),
-                        "color": form.get("secondary-disabled-hover-text-color"),
-                        "outline": form.get("secondary-disabled-hover-outline")
-                    }
-                },
-                "borderRadius": form.get("secondary-border-radius")
-            },
-        }
-    }
+        "style": this.getCustomStyle()
+    };
 
     if (instrument) {
         textField.value += `update() called\n`;
@@ -203,4 +157,93 @@ function cancelScript() {
         textField.value += `cancel() called\n`;
         instrument.cancel();
     }
+}
+
+function getCustomStyle() {
+    const form = new FormData(styleForm);
+    const style = {
+        "button": {
+            "enabled": {
+                "backgroundColor": form.get("primary-enabled-color"),
+                "color": form.get("primary-enabled-text-color"),
+                "outline": form.get("primary-enabled-outline"),
+                "hover": {
+                    "backgroundColor": form.get("primary-enabled-hover-color"),
+                    "color": form.get("primary-enabled-hover-text-color"),
+                    "outline": form.get("primary-enabled-hover-outline")
+                }
+            },
+            "disabled": {
+                "backgroundColor": form.get("primary-disabled-color"),
+                "color": form.get("primary-disabled-text-color"),
+                "outline": form.get("primary-disabled-outline"),
+                "hover": {
+                    "backgroundColor": form.get("primary-disabled-hover-color"),
+                    "color": form.get("primary-disabled-hover-text-color"),
+                    "outline": form.get("primary-disabled-hover-outline")
+                }
+            },
+            "borderRadius": form.get("primary-border-radius")
+        },
+        "secondaryButton": {
+            "enabled": {
+                "backgroundColor": form.get("secondary-enabled-color"),
+                "color": form.get("secondary-enabled-text-color"),
+                "outline": form.get("secondary-enabled-outline"),
+                "hover": {
+                    "backgroundColor": form.get("secondary-enabled-hover-color"),
+                    "color": form.get("secondary-enabled-hover-text-color"),
+                    "outline": form.get("secondary-enabled-hover-outline")
+                }
+            },
+            "disabled": {
+                "backgroundColor": form.get("secondary-disabled-color"),
+                "color": form.get("secondary-disabled-text-color"),
+                "outline": form.get("secondary-disabled-outline"),
+                "hover": {
+                    "backgroundColor": form.get("secondary-disabled-hover-color"),
+                    "color": form.get("secondary-disabled-hover-text-color"),
+                    "outline": form.get("secondary-disabled-hover-outline")
+                }
+            },
+            "borderRadius": form.get("secondary-border-radius")
+        },
+    };
+
+    return style;
+}
+
+function resetCustomStyle() {
+    const form = new FormData(styleForm);
+    form.set("primary-enabled-color", "#2F2424");
+    form.set("primary-enabled-text-color", "#FFFFFF");
+    form.set("primary-enabled-outline", "1px solid transparent");
+    form.set("primary-enabled-hover-color", "#72605E");
+    form.set("primary-enabled-hover-text-color", "#FFFFFF");
+    form.set("primary-enabled-hover-outline", "");
+    form.set("primary-disabled-color", "#EBE7E2");
+    form.set("primary-disabled-text-color", "#72605E");
+    form.set("primary-disabled-outline", "1px solid transparent");
+    form.set("primary-disabled-hover-color", "");
+    form.set("primary-disabled-hover-text-color", "");
+    form.set("primary-disabled-hover-outline", "");
+    form.set("primary-border-radius", 8);
+    form.set("secondary-enabled-color", "#FFFFFF");
+    form.set("secondary-enabled-text-color", "#2F2424");
+    form.set("secondary-enabled-outline", "1px solid #72605E");
+    form.set("secondary-enabled-hover-color", "#72605E");
+    form.set("secondary-enabled-hover-text-color", "");
+    form.set("secondary-enabled-hover-outline", "")
+    form.set("secondary-disabled-color", "#EBE7E2");
+    form.set("secondary-disabled-text-color", "#72605E");
+    form.set("secondary-disabled-outline", "1px solid transparent");
+    form.set("secondary-disabled-hover-color", "");
+    form.set("secondary-disabled-hover-text-color", "");
+    form.set("secondary-disabled-hover-outline", "");
+    form.set("secondary-border-radius", 8);
+
+    for (const [key, value] of form) {
+        const input = styleForm.elements[key];
+        input.value = value;
+    };
 }
