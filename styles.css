@@ -126,6 +126,25 @@
     margin: 0 10px;
 }
 
+.iframe-link-launcher {
+    margin: 10px;
+}
+
+.iframe-button {
+    height: 50px;
+    margin: 10px
+}
+
+#frame {
+    display: block;
+    width: 95%;
+    margin: 15px auto;
+}
+
+#launch-link-input {
+    width: 100%;
+}
+
 @media (max-width: 600px) {
     #script-controller, #nav-bar {
         flex-wrap: wrap;

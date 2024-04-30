@@ -8,9 +8,14 @@
 </head>
 <body>
     <script src="iframe-app.js" type="text/javascript"></script>
-    <label for="launch-link-input">Launch Link: </label>
-    <input id="launch-link-input" type="text">
-    <button onclick="launch()">Launch Here</button>
-    <button onclick="launchTop()">Launch Top Location</button>
+    <div class="iframe-link-launcher">
+        <label for="launch-link-input">Launch Link: </label>
+        <input id="launch-link-input" type="text">
+    </div>
+    <button type="button" class="iframe-button" onclick="launchLink('window_location_href')">Launch with "window.location.Href"</button>
+    <button type="button" class="iframe-button" onclick="launchLink('window_open')">Launch with "window.open()"</button>
+    <button type="button" class="iframe-button" onclick="launchLink('document_location')">Launch with "this.document.location.href"</button>
+    <button type="button" class="iframe-button" onclick="launchLink('location_assign')">Launch with "window.location.assign()"</button>
+    <button type="button" class="iframe-button" onclick="launchLink('location_top_assign')">Launch with "window.top.location.assign()"</button>
 </body>
 </html>

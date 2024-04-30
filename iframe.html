@@ -15,9 +15,11 @@
     </div>
     <div>
         <script src="iframe-app.js" type="text/javascript"></script>
-        <label for="launch-link-input">Launch Link: </label>
-        <input id="launch-link-input" type="text">
-        <button onclick="launch()">Launch!</button>
+        <div class="iframe-link-launcher">
+            <label for="launch-link-input">Launch Link: </label>
+            <input id="launch-link-input" type="text">
+        </div>
+        <button type="button" class="iframe-button" onclick="launchLink('location_assign')">Launch with "window.location.assign()"</button>
         <iframe id="frame" src="./iframe-content.html">
         </iframe>
     </div>
