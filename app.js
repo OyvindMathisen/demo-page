@@ -160,7 +160,11 @@ function closeScript() {
 function cancelScript() {
     if (instrument) {
         addLogText("cancel() called");
-        instrument.cancel();
+        // CreditCard calls cancel for "abort". Fallback to avoid crash
+        if (typeof instrument.cancel === "function")
+            instrument.cancel();
+        else
+            instrument.abort();
     }
 }
 
