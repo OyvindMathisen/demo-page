@@ -88,7 +88,7 @@ function getInstrumentFromUrl(url) {
     if (url.includes("creditaccount"))
         return "creditaccount";
     if (url.includes("creditcard"))
-        return "creditcard";
+        return "creditCard";
     if (url.includes("invoice"))
         return "invoice";
     if (url.includes("mobilepay"))
