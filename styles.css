@@ -21,9 +21,14 @@
 #script-input-form {
     display: flex;
     width: 100%;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     margin: 20px 0;
+}
+
+#script-options {
+    display: flex;
 }
 
 #script-input-form label {
@@ -37,7 +42,7 @@
 }
 
 #script-input {
-    width: 75%;
+    width: 90%;
 }
 
 #main-script-input > label {
