@@ -45,6 +45,8 @@ function getConfig() {
         onPaymentFailed: Function = (data) => handleEvent("onPaymentFailed", data),
         onPaymentCanceled: Function = (data) => handleEvent("onPaymentCanceled", data),
         onPaymentPending: Function = (data) => handleEvent("onPaymentPending", data),
+
+        onLaunchNativeGooglePay: Function = (data) => handleEvent("onLaunchNativeGooglePay", data),
     
         container: any = "paymentmenu-container",
         culture: string = "sv-SE",
