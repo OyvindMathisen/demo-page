@@ -21,10 +21,24 @@
             <label for="script-input">Script URL:</label>
             <input id="script-input" type="text">
             <div id="script-options">
-                <label for="script-app-toggle">App Integration:</label>
-                <input id="script-app-toggle" type="checkbox">
-                <button id="script-input-button" type="submit">Launch</button>
+                <div>
+                    <label for="script-app-toggle">App Integration</label>
+                    <input id="script-app-toggle" type="checkbox">
+                </div>
+                <div>
+                    <label for="script-native-googlepay-toggle">Native GooglePay Payment</label>
+                    <input id="script-native-googlepay-toggle" type="checkbox">
+                </div>
+                <div>
+                    <label for="script-delay-execution-toggle">Delay Payment Button</label>
+                    <input id="script-delay-execution-toggle" type="checkbox">
+                </div>
+                <div>
+                    <label for="script-delay-execution-time">Delay (ms)</label>
+                    <input id="script-delay-execution-time" type="number" value="1000">
+                </div>
             </div>
+            <button id="script-input-button" type="submit">Launch</button>
         </form>
         <label for="debug-logger">Logs</label>
         <textarea id="debug-logger"></textarea>

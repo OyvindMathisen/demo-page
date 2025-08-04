@@ -24,16 +24,29 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin: 20px 0;
+    margin: 2em 0;
+    gap: 1em 0;
 }
 
 #script-options {
     display: flex;
+    gap: 1em 2em;
+    flex-wrap: wrap;
 }
 
-#script-input-form label {
-    width: 10%;
-    white-space: nowrap;
+#script-options > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#script-options > div > input[type=checkbox] {
+    width: 50%;
+    height: 50%;
+}
+
+#script-options > div > input[type=number] {
+    width: 100%;
 }
 
 #script-input-button {
@@ -82,11 +95,11 @@
     overflow-x: hidden;
 }
 
-#modal select, input {
+#modal select, #modal input {
     width: 200px;
 }
 
-#modal label, input {
+#modal label, #modal input {
     margin: 3px 0;
 }
 

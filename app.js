@@ -3,6 +3,15 @@ const styleForm = document.getElementById("modal");
 const inputField = document.getElementById("script-input");
 const textField = document.getElementById("debug-logger");
 const appIntegrationToggle = document.getElementById("script-app-toggle");
+const nativeGooglePayToggle = document.getElementById("script-native-googlepay-toggle");
+const delayPaymentToggle = document.getElementById("script-delay-execution-toggle");
+const delayPaymentDurationMs = document.getElementById("script-delay-execution-time");
+let instrument = null;
+let redirectUrl = null;
+let nativeGooglePay = false;
+let delayPayment = false;
+let integration = "HostedView";
+
 inputForm.addEventListener("submit", function(event) {
     event.preventDefault();
     openPaymentMenu();
@@ -11,15 +20,15 @@ styleForm.addEventListener("submit", function(event) {
     event.preventDefault();
     updateScript();
 });
-appIntegrationToggle.addEventListener("change", () => { integration = appIntegrationToggle.checked ? "App" : "HostedView" });
-let instrument = null;
-let redirectUrl = null;
-let integration = "HostedView";
+appIntegrationToggle.addEventListener("change", () => integration = appIntegrationToggle.checked ? "App" : "HostedView");
+nativeGooglePayToggle.addEventListener("change", () => nativeGooglePay = nativeGooglePayToggle.checked);
+delayPaymentToggle.addEventListener("change", () => delayPayment = delayPaymentToggle.checked)
 
 resetCustomStyle();
 
 function getConfig() {
     return {
+        // PaymentMenu
         onPaymentAttemptStarted: Function = (data) => handleEvent("onPaymentAttemptStarted", data),
         onPaymentAttemptFailed: Function = (data) => handleEvent("onPaymentAttemptFailed", data),
         onPaymentAttemptAborted: Function = (data) => handleEvent("onPaymentAttemptAborted", data),
@@ -32,6 +41,7 @@ function getConfig() {
         onPaymentCompleted: Function = (data) => handleEvent("onPaymentCompleted", data),
         onError: Function = (data) => handleEvent("onError", data),
     
+        // Checkout
         onEventNotification: Function = (data) => handleEvent("onEventNotification", data),
         onInstrumentSelected: Function = (data) => handleEvent("onInstrumentSelected", data),
         onTermsOfServiceRequested: Function = (data) => handleEvent("onTermsOfServiceRequested", data),
@@ -46,7 +56,9 @@ function getConfig() {
         onPaymentCanceled: Function = (data) => handleEvent("onPaymentCanceled", data),
         onPaymentPending: Function = (data) => handleEvent("onPaymentPending", data),
 
-        onLaunchNativeGooglePay: Function = (data) => handleEvent("onLaunchNativeGooglePay", data),
+        // New functionality
+        onLaunchNativeGooglePay: Function = nativeGooglePay ? (data) => handleEvent("onLaunchNativeGooglePay", data) : undefined,
+        onPaymentButtonPressed: Function = delayPayment ? (data) => handleEvent("onPaymentButtonPressed", data) : undefined,
     
         container: any = "paymentmenu-container",
         culture: string = "sv-SE",
@@ -88,10 +100,29 @@ function handleEvent(event, data) {
     console.log(`${event}: ${json}`);
 
     // TODO: Improve this 'whitelist'
-    if ((event === "onExternalRedirect" || event === "onOutOfViewRedirect") && data.redirectUrl !== undefined)
+    if ((event === "onExternalRedirect" || event === "onOutOfViewRedirect") && data?.redirectUrl !== undefined)
         window.location.assign(data.redirectUrl);
+
+    if ((event === "onPaymentButtonPressed") && data?.paymentOrder.id !== undefined)
+        delayPaymentFlow(data);
 }
 
+function delayPaymentFlow(payload) {
+    setTimeout(() => {
+        const clientMessage = {
+            paymentOrderId: payload.paymentOrder.id,
+            confirmation: true
+        };
+        // TODO: Store the value somewhere from input, rather than retrieving it and processing it again
+        const scriptUrl = inputField.value;
+        let url = new URL(scriptUrl);
+        const instrumentName = getInstrumentFromUrl(url.href);
+        window.payex.hostedView[instrumentName]().resume(clientMessage);
+        
+    }, delayPaymentDurationMs.value);
+}
+
+// TODO: Make a generalized method to take url and string to get the right instrument formating
 function getInstrumentFromUrl(url) {
     if (url.includes("carpay"))
         return "carpay";
