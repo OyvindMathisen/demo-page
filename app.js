@@ -12,6 +12,7 @@ let redirectUrl = null;
 let nativeGooglePay = false;
 let delayPayment = false;
 let delayPaymentSuccess = true;
+let currentInstrumentName = "";
 let integration = "HostedView";
 
 inputForm.addEventListener("submit", function(event) {
@@ -90,8 +91,8 @@ function openPaymentMenu() {
     script.type = "text/javascript";
     script.id = "payex-payment-menu-script";
     script.onload = function () {
-        const instrumentName = getInstrumentFromUrl(url.href);
-        instrument = window.payex.hostedView[instrumentName](getConfig());
+        currentInstrumentName = getInstrumentFromUrl(url.href);
+        instrument = window.payex.hostedView[currentInstrumentName](getConfig());
         instrument.open();
     }
     document.body.insertAdjacentElement("afterbegin", script);
@@ -116,12 +117,11 @@ function delayPaymentFlow(payload) {
             paymentOrderId: payload.paymentOrder.id,
             confirmation: delayPaymentSuccess
         };
-        // TODO: Store the value somewhere from input, rather than retrieving it and processing it again
-        const scriptUrl = inputField.value;
-        let url = new URL(scriptUrl);
-        const instrumentName = getInstrumentFromUrl(url.href);
-        window.payex.hostedView[instrumentName]().resume(clientMessage);
-        
+
+        window.payex.hostedView[currentInstrumentName]().resume(clientMessage);
+        const json = JSON.stringify(clientMessage);
+        addLogText("resume() called");
+        console.log(`resume: ${json}`);
     }, delayPaymentDurationMs.value);
 }
 
