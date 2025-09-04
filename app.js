@@ -5,11 +5,13 @@ const textField = document.getElementById("debug-logger");
 const appIntegrationToggle = document.getElementById("script-app-toggle");
 const nativeGooglePayToggle = document.getElementById("script-native-googlepay-toggle");
 const delayPaymentToggle = document.getElementById("script-delay-execution-toggle");
+const delayPaymentSuccessToggle = document.getElementById("script-delay-execution-success");
 const delayPaymentDurationMs = document.getElementById("script-delay-execution-time");
 let instrument = null;
 let redirectUrl = null;
 let nativeGooglePay = false;
 let delayPayment = false;
+let delayPaymentSuccess = true;
 let integration = "HostedView";
 
 inputForm.addEventListener("submit", function(event) {
@@ -22,7 +24,8 @@ styleForm.addEventListener("submit", function(event) {
 });
 appIntegrationToggle.addEventListener("change", () => integration = appIntegrationToggle.checked ? "App" : "HostedView");
 nativeGooglePayToggle.addEventListener("change", () => nativeGooglePay = nativeGooglePayToggle.checked);
-delayPaymentToggle.addEventListener("change", () => delayPayment = delayPaymentToggle.checked)
+delayPaymentToggle.addEventListener("change", () => delayPayment = delayPaymentToggle.checked);
+delayPaymentSuccessToggle.addEventListener("change", () => delayPaymentSuccess = delayPaymentSuccessToggle.checked);
 
 resetCustomStyle();
 
@@ -111,7 +114,7 @@ function delayPaymentFlow(payload) {
     setTimeout(() => {
         const clientMessage = {
             paymentOrderId: payload.paymentOrder.id,
-            confirmation: true
+            confirmation: delayPaymentSuccess
         };
         // TODO: Store the value somewhere from input, rather than retrieving it and processing it again
         const scriptUrl = inputField.value;
